@@ -105,7 +105,6 @@ module.exports = {
       // in the main CSS file.
       {
         test: /\.css$/,
-        include: [paths.appSrc, paths.appNodeModules],
         // "?-autoprefixer" disables autoprefixer in css-loader itself:
         // https://github.com/webpack/css-loader/issues/281
         // We already have it thanks to postcss. We only pass this flag in
@@ -121,28 +120,44 @@ module.exports = {
       // allow it implicitly so we also enable it.
       {
         test: /\.json$/,
-        include: [paths.appSrc, paths.appNodeModules],
         loader: 'json'
       },
       // "file" loader makes sure those assets end up in the `build` folder.
       // When you `import` an asset, you get its filename.
       {
-        test: /\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        include: [paths.appSrc, paths.appNodeModules],
+        test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+        exclude: /\/favicon.ico$/,
         loader: 'file',
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
+      // A special case for favicon.ico to place it into build root directory.
+      {
+        test: /\/favicon.ico$/,
+        include: [paths.appSrc],
+        loader: 'file',
+        query: {
+          name: 'favicon.ico?[hash:8]'
         }
       },
       // "url" loader works just like "file" loader but it also embeds
       // assets smaller than specified size as data URLs to avoid requests.
       {
         test: /\.(mp4|webm)(\?.*)?$/,
-        include: [paths.appSrc, paths.appNodeModules],
         loader: 'url',
         query: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
+      // "html" loader is used to process template page (index.html) to resolve
+      // resources linked with <link href="./relative/path"> HTML tags.
+      {
+        test: /\.html$/,
+        loader: 'html',
+        query: {
+          attrs: ['link:href'],
         }
       }
     ]
@@ -172,7 +187,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
-      favicon: paths.appFavicon,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

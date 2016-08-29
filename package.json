@@ -6,6 +6,7 @@
     "autoprefixer": "6.4.0",
     "babel-core": "6.14.0",
     "babel-eslint": "6.1.2",
+    "babel-jest": "14.1.0",
     "babel-loader": "6.2.5",
     "babel-plugin-transform-class-properties": "6.11.5",
     "babel-plugin-transform-object-rest-spread": "6.8.0",
@@ -21,7 +22,7 @@
     "cross-spawn": "4.0.0",
     "css-loader": "0.23.1",
     "detect-port": "1.0.0",
-    "eslint": "3.1.1",
+    "eslint": "3.2.2",
     "eslint-loader": "1.4.1",
     "eslint-plugin-flowtype": "2.4.0",
     "eslint-plugin-import": "1.12.0",
@@ -32,11 +33,14 @@
     "filesize": "3.3.0",
     "fs-extra": "0.30.0",
     "gzip-size": "3.0.0",
+    "html-loader": "0.4.3",
     "html-webpack-plugin": "2.22.0",
     "http-proxy-middleware": "0.17.0",
+    "jest": "14.1.0",
     "json-loader": "0.5.4",
     "object-assign": "4.1.0",
     "opn": "4.0.2",
+    "path-exists": "3.0.0",
     "postcss-loader": "0.9.1",
     "promise": "7.1.1",
     "recursive-readdir": "2.0.0",
@@ -54,9 +58,30 @@
   },
   "scripts": {
     "start": "node ./scripts/start.js",
-    "build": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "./config/eslint.js"
+  },
+  "jest": {
+    "automock": false,
+    "moduleNameMapper": {
+      "^[./a-zA-Z0-9$_-]+\\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/config/jest/FileStub.js",
+      "^[./a-zA-Z0-9$_-]+\\.css$": "<rootDir>/config/jest/CSSStub.js"
+    },
+    "persistModuleRegistryBetweenSpecs": true,
+    "scriptPreprocessor": "<rootDir>/config/jest/transform.js",
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/environment.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/build/"
+    ],
+    "testRegex": "(__tests__/.*|\\.(test|spec))\\.js$",
+    "testEnvironment": "node",
+    "verbose": true
   }
 }
