@@ -1,6 +1,6 @@
 # Create React App Ejected
 
-This repo tracks the ejected state of each [create-react-app](https://github.com/facebookincubator/create-react-app)(CRA) release for those who have ejected but would like to maintain upstream compatibility.
+This repo tracks the ejected state of each [create-react-app](https://github.com/facebookincubator/create-react-app) (CRA) release for those who have ejected but would like to maintain upstream compatibility.
 
 ## Usage
 
