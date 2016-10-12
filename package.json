@@ -37,8 +37,8 @@
     "path-exists": "2.1.0",
     "postcss-loader": "0.13.0",
     "promise": "7.1.1",
-    "react-dev-utils": "^0.1.1",
-    "recursive-readdir": "2.0.0",
+    "react-dev-utils": "^0.2.1",
+    "recursive-readdir": "2.1.0",
     "rimraf": "2.5.4",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
@@ -57,7 +57,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "eslintConfig": {
-    "extends": "./node_modules/react-scripts/config/eslint.js"
+    "extends": "react-app"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -77,5 +77,10 @@
     ],
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
   }
 }
